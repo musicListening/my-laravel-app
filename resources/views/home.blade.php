@@ -18,7 +18,7 @@
         <!-- Google Fonts (Local) -->
         <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
 
-        <!-- Your Custom CSS -->
+        <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         <!-- Libraries Stylesheet -->
@@ -45,10 +45,9 @@
         <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        
-        <h1 class="sitename">AquaLogix</h1>
-      </a>
+          <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+          <h1 class="sitename">AquaLogix</h1>
+          </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
@@ -75,7 +74,7 @@
          Created entirely by nature & the best water in Sri Lanka. <br> 
          Bottled at the source with High Quality & Purity Guaranteed.
         </p>
-        <a href="#about" class="btn btn-light mt-4">Learn More</a>
+        <a href="{{ route('pricing') }}" class="btn btn-light mt-4">Learn More</a>
       </div>
     </div>
   </div>
