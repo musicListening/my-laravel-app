@@ -8,17 +8,16 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   color: #000000;
+
+  overflow-y: scroll;                /* Allow scrolling */
+  -ms-overflow-style: none;         /* Hide scrollbar in IE & Edge */
+  scrollbar-width: none;            /* Hide scrollbar in Firefox */
 }
-@keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+
+body::-webkit-scrollbar {
+  display: none;                    /* Hide scrollbar in Chrome, Safari, Edge */
 }
+
 
 /* NAVBAR */
 .header {
@@ -91,6 +90,7 @@ body {
 .mobile-nav-toggle {
   color: white;
 }
+
 
 /* HERO SECTION */
 .hero {
@@ -341,4 +341,5 @@ body {
     padding: 80px 20px;
   }
 }
+
 

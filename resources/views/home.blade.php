@@ -26,11 +26,18 @@
         <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
         <style>
-          .navmenu ul li a {
-            font-size: 1.2rem;
-            font-weight: 500;
-          }
-          </style>
+        .navmenu ul li a {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: white;
+        transition: color 0.3s;
+      }
+
+      .navmenu ul li a.active-section {
+        color: gold !important;
+      }
+
+      </style>
 
 
     </head>
@@ -45,17 +52,15 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#pricing">Login</a></li>
+          <li><a href="{{ url('/') }}" class="active">Home</a></li>
+          <li><a href="{{ url('/#about') }}">About</a></li>
+          <li><a href="{{ url('/#services') }}">Services</a></li>
+          <li><a href="{{ route('pricing') }}">Pricing</a></li>
+          <li><a href="{{ route('Login') }}#pricing">Login</a></li>
           <li><a href="#contact">Register</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <a class="btn btn-primary btn-getstarted" href="#pricing" >Order Now</a>
 
     </div>
   </header>
@@ -189,7 +194,7 @@
 <div class="container-fluid service bg-light py-5" id="services" >
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-uppercase text-primary" style="font-family: 'Playfair Display', serif;font-weight:500;font-size:150px;">Our Service</h4>
+                    <h4 class="text-uppercase text-primary" style="font-family: 'Playfair Display', serif;font-weight:500;font-size:30px;">Our Service</h4>
                     <h1 class="display-3 text-capitalize mb-3" style="font-family: 'Playfair Display', serif;font-size:70px">Protect Your Family with Best Water</h1>
                 </div>
                 <div class="row gx-0 gy-4 align-items-center">
@@ -295,6 +300,50 @@
                 </div>
             </div>
         </div>
+<footer class="bg-dark text-light pt-5 pb-3 mt-5" style="font-family: 'Open Sans', 'Playfair Display', Arial, sans-serif;">
+  <div class="container">
+    <div class="row">
+      <!-- Logo & About -->
+      <div class="col-md-4 mb-4">
+        <h3 class="mb-2" style="font-family: 'Playfair Display', serif; color: #00aaff;">AquaLogix</h3>
+        <p style="font-size: 1rem;">
+          The number one drinking water in Sri Lanka. Pure, natural, and bottled at the source for your health and refreshment.
+        </p>
+      </div>
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-4">
+        <h5 class="mb-3 text-uppercase" style="letter-spacing:1px;">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="{{ url('/') }}" class="text-light text-decoration-none">Home</a></li>
+          <li><a href="{{ url('/#about') }}" class="text-light text-decoration-none">About</a></li>
+          <li><a href="{{ url('/#services') }}" class="text-light text-decoration-none">Services</a></li>
+          <li><a href="{{ route('pricing') }}" class="text-light text-decoration-none">Pricing</a></li>
+          <li><a href="{{ route('Login') }}" class="text-light text-decoration-none">Login</a></li>
+          <li><a href="#contact" class="text-light text-decoration-none">Register</a></li>
+        </ul>
+      </div>
+      <!-- Contact & Social -->
+      <div class="col-md-4 mb-4">
+        <h5 class="mb-3 text-uppercase" style="letter-spacing:1px;">Contact Us</h5>
+        <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i>Padukka, Sri Lanka</p>
+        <p class="mb-1"><i class="fas fa-envelope me-2"></i>info@aqualogix.lk</p>
+        <p class="mb-3"><i class="fas fa-phone me-2"></i>+94 77 123 4567</p>
+        <div>
+          <a href="#" class="text-light me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+          <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-light"><i class="fab fa-linkedin-in fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="border-secondary">
+    <div class="row">
+      <div class="col text-center">
+        <small>&copy; {{ date('Y') }} AquaLogix. All rights reserved.</small>
+      </div>
+    </div>
+  </div>
+</footer>
 
   <!-- Bootstrap JS (for dropdowns and responsive menu) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -410,6 +459,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver(observerCallback, observerOptions);
   serviceItems.forEach(item => observer.observe(item));
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll('.navmenu ul li a');
+    const aboutSection = document.querySelector('#about');
+
+    window.addEventListener('scroll', function () {
+      const fromTop = window.scrollY + 100;
+
+      if (aboutSection.offsetTop <= fromTop && (aboutSection.offsetTop + aboutSection.offsetHeight) > fromTop) {
+        links.forEach(link => {
+          if (link.getAttribute('href').includes('#about')) {
+            link.classList.add('active-section');
+          } else {
+            link.classList.remove('active-section');
+          }
+        });
+      } else {
+        links.forEach(link => {
+          if (link.getAttribute('href').includes('#about')) {
+            link.classList.remove('active-section');
+          }
+        });
+      }
+    });
+  });
 
 </script>
 <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
